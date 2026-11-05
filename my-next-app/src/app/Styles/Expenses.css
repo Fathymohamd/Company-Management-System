@@ -1,0 +1,479 @@
+
+
+.expenses-page {
+  direction: rtl;
+  text-align: right;
+  padding: 28px;
+  min-height: 100vh;
+  background: #f7f8fc;
+  color: #202438;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+
+.expenses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.expenses-header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.expenses-header p,
+.expenses-toolbar p {
+  margin: 0;
+  color: #858ba0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* الأزرار الرئيسية */
+.expense-add-btn,
+.expense-save-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 9px;
+  background: #635bdb;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  font-family: inherit;
+}
+
+.expense-add-btn:hover,
+.expense-save-btn:hover {
+  background: #5148c7;
+  transform: translateY(-1px);
+}
+
+/* بطاقات الإحصائيات */
+.expenses-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.expense-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
+  padding: 22px 18px;
+  background: #fff;
+  border: 1px solid #eceef5;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(30, 35, 90, 0.035);
+}
+
+.expense-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+.expense-stat-icon.purple {
+  color: #635bdb;
+  background: #eeecff;
+}
+
+.expense-stat-icon.green {
+  color: #179b68;
+  background: #e4f8ef;
+}
+
+.expense-stat-icon.orange {
+  color: #e38a26;
+  background: #fff1df;
+}
+
+.expense-stat-icon.blue {
+  color: #3485e9;
+  background: #e6f1ff;
+}
+
+.expense-stat-card p {
+  margin: 0 0 8px;
+  color: #81879a;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.expense-stat-card h2 {
+  margin: 0 0 7px;
+  font-size: 20px;
+  overflow-wrap: anywhere;
+  direction: rtl;
+}
+
+.expense-stat-card span {
+  color: #a0a5b5;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+/* محتوى المصروفات */
+.expenses-content {
+  padding: 24px;
+  background: white;
+  border: 1px solid #eceef5;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(30, 35, 90, 0.035);
+}
+
+.expenses-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.expenses-toolbar h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+/* البحث */
+.expense-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 280px;
+  max-width: 100%;
+  padding: 11px 14px;
+  color: #9298aa;
+  background: #f8f9fc;
+  border: 1px solid #e9ebf3;
+  border-radius: 9px;
+  box-sizing: border-box;
+}
+
+.expense-search input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #202438;
+  font-family: inherit;
+  font-size: 13px;
+  text-align: right;
+  direction: rtl;
+}
+
+.expense-search input::placeholder {
+  color: #9298aa;
+}
+
+/* نموذج إضافة وتعديل المصروفات */
+.expense-form {
+  margin-bottom: 25px;
+  padding: 22px;
+  background: #fafaff;
+  border: 1px solid #e7e6fa;
+  border-radius: 12px;
+}
+
+.expense-form h3 {
+  margin: 0 0 20px;
+  font-size: 18px;
+}
+
+.expense-form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.expense-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  color: #51566b;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+.expense-form-grid input,
+.expense-form-grid select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #e2e5ef;
+  border-radius: 8px;
+  outline: none;
+  background: white;
+  color: #303449;
+  font-family: inherit;
+  font-size: 13px;
+  text-align: right;
+  direction: rtl;
+}
+
+.expense-form-grid input:focus,
+.expense-form-grid select:focus {
+  border-color: #635bdb;
+  box-shadow: 0 0 0 3px rgba(99, 91, 219, 0.1);
+}
+
+/* أزرار النموذج */
+.expense-form-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.expense-form-actions button {
+  padding: 11px 17px;
+  border: 1px solid #e0e3ed;
+  border-radius: 8px;
+  background: white;
+  color: #51566b;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.expense-form-actions button:hover {
+  background: #f1f2f8;
+}
+
+.expense-form-actions .expense-save-btn {
+  border: none;
+  background: #635bdb;
+  color: white;
+}
+
+.expense-form-actions .expense-save-btn:hover {
+  background: #5148c7;
+}
+
+/* جدول المصروفات */
+.expenses-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.expenses-table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+
+.expenses-table th {
+  padding: 15px 14px;
+  background: #f8f9fc;
+  color: #777e93;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.expenses-table td {
+  padding: 16px 14px;
+  border-bottom: 1px solid #f0f1f6;
+  color: #62687d;
+  font-size: 13px;
+  text-align: right;
+  vertical-align: middle;
+}
+
+.expenses-table tbody tr:hover {
+  background: #fcfcff;
+}
+
+/* اسم المصروف */
+.expense-title-cell {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #292d42;
+}
+
+.expense-row-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: #f0efff;
+  color: #635bdb;
+}
+
+.expense-category {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #f1f2f8;
+  color: #666d83;
+  font-size: 12px;
+}
+
+.expenses-table .expense-amount {
+  color: #252940;
+  font-weight: 700;
+  direction: rtl;
+}
+
+/* حالة الدفع */
+.expense-status {
+  display: inline-block;
+  padding: 6px 11px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.expense-status.paid {
+  background: #e4f8ee;
+  color: #168456;
+}
+
+.expense-status.pending {
+  background: #fff2df;
+  color: #cb8123;
+}
+
+/* أزرار التعديل والحذف */
+.expense-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.expense-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.expense-edit-btn {
+  background: #eeedff;
+  color: #635bdb;
+}
+
+.expense-edit-btn:hover {
+  background: #dedbff;
+}
+
+.expense-delete-btn {
+  background: #fff0f0;
+  color: #e05252;
+}
+
+.expense-delete-btn:hover {
+  background: #ffdddd;
+}
+
+/* عدم وجود نتائج */
+.expenses-table .expense-empty {
+  padding: 40px 15px;
+  text-align: center;
+  color: #9298aa;
+  white-space: normal;
+}
+
+/* أسفل الجدول */
+.expenses-footer {
+  padding-top: 18px;
+  color: #9298aa;
+  font-size: 12px;
+}
+
+/* الشاشات المتوسطة */
+@media (max-width: 1200px) {
+  .expenses-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .expense-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* الهواتف */
+@media (max-width: 650px) {
+  .expenses-page {
+    padding: 16px;
+  }
+
+  .expenses-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .expenses-header h1 {
+    font-size: 23px;
+  }
+
+  .expense-add-btn {
+    width: 100%;
+  }
+
+  .expenses-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .expenses-content {
+    padding: 15px;
+  }
+
+  .expenses-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .expense-search {
+    width: 100%;
+  }
+
+  .expense-form {
+    padding: 15px;
+  }
+
+  .expense-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .expense-form-actions {
+    flex-wrap: wrap;
+  }
+
+  .expense-form-actions button {
+    flex: 1;
+  }
+}
