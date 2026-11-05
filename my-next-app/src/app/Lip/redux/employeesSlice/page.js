@@ -6,7 +6,7 @@ export const deleteEmployee = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/employees/${id}`,
+        `https://company-management-system-phi.vercel.app/api/employees/${id}`,
         {
           method: "DELETE",
         }

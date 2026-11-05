@@ -5,7 +5,7 @@ export const search = createAsyncThunk(
   async (name, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/searchRouter/search?name=${encodeURIComponent(name)}`
+        `https://company-management-system-phi.vercel.app/api/searchRouter/search?name=${encodeURIComponent(name)}`
       );
 
       const result = await response.json();
@@ -33,7 +33,7 @@ export const orderSearch = createAsyncThunk(
   async (name, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/orderSearch/search?name=${encodeURIComponent(name)}`
+        `https://company-management-system-phi.vercel.app/api/orderSearch/search?name=${encodeURIComponent(name)}`
       );
 
       const result = await response.json();

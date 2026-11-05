@@ -10,7 +10,7 @@ export const addEmployee = createAsyncThunk(
   async (employeeData, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "http://localhost:8080/api/employeesThunk",
+        "https://company-management-system-phi.vercel.app/api/employeesThunk",
         {
           method: "POST",
           headers: {
@@ -46,7 +46,7 @@ export const formData = createAsyncThunk(
   async (form, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "http://localhost:8080/api/formData",
+        "https://company-management-system-phi.vercel.app/api/formData",
         {
           method: "POST",
           headers: {

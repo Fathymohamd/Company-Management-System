@@ -6,7 +6,7 @@ export const customer_orders = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "http://localhost:8080/api/customer_orders"
+        "https://company-management-system-phi.vercel.app/api/customer_orders"
       );
 
       const result = await response.json();
@@ -29,7 +29,7 @@ export const updateOrderStatus = createAsyncThunk(
   async ({ id, status }, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/customer_orders/${id}/status`,
+        `https://company-management-system-phi.vercel.app/api/customer_orders/${id}/status`,
         {
           method: "PATCH",
           headers: {
@@ -59,9 +59,9 @@ export const productName = createAsyncThunk(
   "search/productName",
   async (customer_name, { rejectWithValue }) => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/product/search?customer_name=${encodeURIComponent(customer_name)}`
-      );
+const response = await fetch(
+  `https://company-management-system-phi.vercel.app/api/product/search?customer_name=${encodeURIComponent(customer_name)}`
+);
 
       const result = await response.json();
 

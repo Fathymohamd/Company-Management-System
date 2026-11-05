@@ -1,7 +1,7 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const API_URL = "http://localhost:8080/api/customers_data";
+const API_URL = "https://company-management-system-phi.vercel.app/api/customers_data";
 
 
 
@@ -98,10 +98,6 @@ export const deleteCustomer = createAsyncThunk(
     }
   }
 );
-
-
-
-
 
 
 export const updateCustomer = createAsyncThunk(

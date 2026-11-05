@@ -4,7 +4,7 @@ export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch("http://localhost:8080/api/orders");
+      const response = await fetch("https://company-management-system-phi.vercel.app/api/orders");
 
       const result = await response.json();
 
