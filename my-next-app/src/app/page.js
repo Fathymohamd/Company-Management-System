@@ -23,7 +23,7 @@ import {fetchOrders} from './Lip/redux/orders/page'
 import { useSelector , useDispatch } from "react-redux";
 
 import { fetchEmployees  } from "./Lip/redux/employeesApi/page";
-
+import {customer_orders} from "./Lip/redux/customer_orders/page"
 import { orderSearch } from "./Lip/redux/searchRedux/page";
 
 const navigation = [
@@ -71,7 +71,7 @@ const activeOrders = product.filter(
   useEffect(()=> {
     dispatch(fetchOrders())
     dispatch(fetchEmployees())
-    // dispatch(productName())
+    dispatch(customer_orders())
   } , [])
 
 
