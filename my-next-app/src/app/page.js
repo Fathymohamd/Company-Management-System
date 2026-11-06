@@ -40,12 +40,15 @@ const navigation = [
 export default function Home() {
    const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch()
-  const orders = useSelector((state) => state.order.data)
-  
+ const product = useSelector(
+  (state) => state.customer?.data ?? []
+);
+
+
   const Employees = useSelector(
     (state) => state.employees.data ?? []
   );
- console.log(Employees)
+
     const order = useSelector(
     (state) => state.search.order ?? []
   );
@@ -53,12 +56,12 @@ export default function Home() {
   const [active, setActive] = useState("/");
 
 
-const totalPrice = orders.reduce(
+const totalPrice = product.reduce(
   (total, order) => total + Number(order.price),
   0
 );
 
-const activeOrders = orders.filter(
+const activeOrders = product.filter(
   (order) => order.status === "قيد التنفيذ"
 ).length;
 
@@ -68,13 +71,14 @@ const activeOrders = orders.filter(
   useEffect(()=> {
     dispatch(fetchOrders())
     dispatch(fetchEmployees())
+    // dispatch(productName())
   } , [])
 
 
   const stats = [
     {
       title: "إجمالي الطلبات",
-      value: orders.length,
+      value: product.length,
       icon: ClipboardList,
       color: "blue",
       change: "من قاعدة البيانات",
@@ -114,7 +118,7 @@ const handleSearch = (e) => {
 
   const displayedEmployees = searchTerm.trim()
     ? order
-    : orders;
+    : product;
 
     
   return (

@@ -99,53 +99,50 @@ const employeesSlice = createSlice({
     },
   },
 
-  extraReducers: (builder) => {
-    builder
-     
-      .addCase(customer_orders.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(customer_orders.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data = action.payload;
-      })
-      .addCase(customer_orders.rejected, (state, action) => {
-        state.loading = false;
-        state.error =
-          action.payload || "حدث خطأ أثناء جلب الطلبات";
-      })
+extraReducers: (builder) => {
+  builder
+    .addCase(customer_orders.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
 
-      .addCase(updateOrderStatus.fulfilled, (state, action) => {
-        const updatedOrder = action.payload;
+    .addCase(customer_orders.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data = action.payload;
+    })
 
+    .addCase(customer_orders.rejected, (state, action) => {
+      state.loading = false;
+      state.error =
+        action.payload || "حدث خطأ أثناء جلب الطلبات";
+    })
+
+    .addCase(updateOrderStatus.fulfilled, (state, action) => {
+      const updatedOrder = action.payload;
+
+      if (updatedOrder) {
         state.data = state.data.map((item) =>
           item.id === updatedOrder.id ? updatedOrder : item
         );
+      }
+    })
 
+    .addCase(productName.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
 
-builder
+    .addCase(productName.fulfilled, (state, action) => {
+      state.loading = false;
+      state.product = action.payload;
+    })
 
-        .addCase(productName.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-
-      .addCase(productName.fulfilled, (state, action) => {
-        state.loading = false;
-        state.product = action.payload;
-      })
-
-      .addCase(productName.rejected, (state, action) => {
-        state.loading = false;
-        state.error =
-          action.payload || "حدث خطأ أثناء البحث";
-      });
-
-
-
-      });
-  },
+    .addCase(productName.rejected, (state, action) => {
+      state.loading = false;
+      state.error =
+        action.payload || "حدث خطأ أثناء البحث";
+    });
+},
 });
 
 export const { remove } = employeesSlice.actions;
