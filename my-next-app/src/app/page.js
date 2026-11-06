@@ -18,13 +18,13 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import "./Styles/dashboard.css";
 
-import {fetchOrders} from './Lip/redux/orders/page'
+import {fetchOrders} from './Lip/redux/orders/orders'
 
 import { useSelector , useDispatch } from "react-redux";
 
-import { fetchEmployees  } from "./Lip/redux/employeesApi/page";
-import {customer_orders} from "./Lip/redux/customer_orders/page"
-import { orderSearch } from "./Lip/redux/searchRedux/page";
+import { fetchEmployees  } from "./Lip/redux/employeesApi/employeesApi";
+import {customer_orders} from "./Lip/redux/customer_orders/customer_orders"
+import { orderSearch } from "./Lip/redux/searchRedux/searchRedux";
 
 const navigation = [
   { label: "لوحة التحكم", icon: LayoutDashboard, href: "/" },

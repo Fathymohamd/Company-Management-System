@@ -26,11 +26,11 @@ import "../Styles/customers.css";
 
 import { useSelector , useDispatch } from "react-redux";
 
-import {fetchCustomers  , handle_search , deleteCustomer , addCustomer}  from "../Lip/redux/customers_data/page"
+import {fetchCustomers  , handle_search , deleteCustomer , addCustomer}  from "../Lip/redux/customers_data/customers_data"
 
-import { customer_orders} from "../Lip/redux/customer_orders/page"
+import { customer_orders} from "../Lip/redux/customer_orders/customer_orders"
 
-import { fetchEmployees } from "../Lip/redux/employeesApi/page";
+import { fetchEmployees } from "../Lip/redux/employeesApi/employeesApi";
 
 export default function CustomersPage() {
     

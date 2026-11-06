@@ -21,10 +21,10 @@ import "../Styles/orders.css";
 
 import { useSelector , useDispatch } from "react-redux";
 
-import {  customer_orders, updateOrderStatus , productName } from "../Lip/redux/customer_orders/page"
+import {  customer_orders, updateOrderStatus , productName } from "../Lip/redux/customer_orders/customer_orders"
 
 
-import { formData } from "../Lip/redux/employeesThunk/page"
+import { formData } from "../Lip/redux/employeesThunk/employeesThunk"
 
 import { toast } from "sonner";
 

@@ -26,7 +26,7 @@ import "../Styles/materials.css";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getMaterials  , searchMaterials , deleteMaterial  , remove  , addMaterial , updateMaterial} 
-from "../Lip/redux/materialsSlice/page";
+from "../Lip/redux/materialsSlice/materialsSlice";
 
 import { toast } from "sonner";
 

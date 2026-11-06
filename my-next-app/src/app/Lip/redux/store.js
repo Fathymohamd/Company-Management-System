@@ -1,22 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import employeesReducer from "./employeesApi/page";
+import employeesReducer from "./employeesApi/employeesApi";
 
-import searchReducer from "./searchRedux/page";
+import searchReducer from "./searchRedux/searchRedux";
 
-import employeesReducerDELET from "./employeesSlice/page";
+import employeesReducerDELET from "./employeesSlice/employeesSlice";
 
-import employeesThunkReducer from "./employeesThunk/page";
+import employeesThunkReducer from "./employeesThunk/employeesThunk";
 
-import orders from "./orders/page";
+import orders from "./orders/orders";
 
-import customer_orders from "./customer_orders/page";
+import customer_orders from "./customer_orders/customer_orders";
 
-import customers_data from "./customers_data/page";
+import customers_data from "./customers_data/customers_data";
 
-import products from "./products/page";
+import products from "./products/products";
 
-import materialsReducer from "./materialsSlice/page";
+import materialsReducer from "./materialsSlice/materialsSlice";
 
 export const store = configureStore({
   reducer: {

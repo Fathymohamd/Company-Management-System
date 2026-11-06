@@ -35,13 +35,13 @@ import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchEmployees , remove } from "../Lip/redux/employeesApi/page";
+import { fetchEmployees , remove } from "../Lip/redux/employeesApi/employeesApi";
 
-import { search } from "../Lip/redux/searchRedux/page";
+import { search } from "../Lip/redux/searchRedux/searchRedux";
 
-import { deleteEmployee } from "../Lip/redux/employeesSlice/page";
+import { deleteEmployee } from "../Lip/redux/employeesSlice/employeesSlice";
 
-import { addEmployee } from "../Lip/redux/employeesThunk/page";
+import { addEmployee } from "../Lip/redux/employeesThunk/employeesThunk";
 
 
 export default function EmployeesPage() {

@@ -24,7 +24,7 @@ import "../Styles/products.css";
 
 import { useSelector , useDispatch } from "react-redux";
 
-import {fetchProducts , searchProducts , deleteProduct , addProduct} from "../Lip/redux/products/page"
+import {fetchProducts , searchProducts , deleteProduct , addProduct} from "../Lip/redux/products/products"
 
 
 const emptyForm = {
