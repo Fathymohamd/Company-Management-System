@@ -41,11 +41,11 @@ export default function Home() {
    const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch()
   const orders = useSelector((state) => state.order.data)
-   
+  
   const Employees = useSelector(
     (state) => state.employees.data ?? []
   );
-
+ console.log(Employees)
     const order = useSelector(
     (state) => state.search.order ?? []
   );
