@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useMemo, useState , useEffect  } from "react";
+import { useState , useEffect  } from "react";
 
 import Link from "next/link";
 
@@ -202,9 +202,21 @@ const filteredMaterials = currentMaterials.filter((item) => {
   );
 });
 
-const priceMaterials = filteredMaterials.reduce((sum , item) =>
- (sum + Number(item.unit_price)) , 0)
-  
+
+const totalQuantity = filteredMaterials.reduce(
+  (sum, item) => sum + Number(item.quantity || 0),
+  0
+);
+
+
+const totalStockValue = filteredMaterials.reduce(
+  (sum, item) =>
+    sum + Number(item.quantity || 0) * Number(item.unit_price || 0),
+  0
+);
+
+
+
   function openAddModal() {
     setEditingId(null);
     setForm(emptyForm);
@@ -380,7 +392,7 @@ const handleDeleteMaterial = async (id) => {
           </div>
           <div>
             <p>إجمالي الكميات</p>
-            <h2>{filteredMaterials.quantity}</h2>
+            <h2>{totalQuantity}</h2>
             <span>وحدة مخزنة</span>
           </div>
         </article>
@@ -403,7 +415,7 @@ const handleDeleteMaterial = async (id) => {
           <div>
             <p>قيمة المخزون</p>
             <h2 className="material-money">
-              {priceMaterials}
+              {totalStockValue}
             </h2>
             <span>{filteredMaterials.filter((item)=>(item.status === "غير متوفر"))
             .length }خامة نفدت بالكامل</span>

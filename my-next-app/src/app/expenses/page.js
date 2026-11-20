@@ -1,7 +1,8 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import {
   FaMoneyBillWave,
   FaPlus,
@@ -12,174 +13,188 @@ import {
   FaChartLine,
   FaReceipt,
 } from "react-icons/fa";
+
 import Link from "next/link"
+
 import "../Styles/Expenses.css";
 
-const initialExpenses = [
-  {
-    id: 1,
-    title: "إيجار المكتب",
-    category: "الإيجار",
-    amount: 12000,
-    date: "2026-10-05",
-    payment: "تحويل بنكي",
-    status: "مدفوع",
-  },
-  {
-    id: 2,
-    title: "فاتورة الكهرباء",
-    category: "المرافق",
-    amount: 1800,
-    date: "2026-10-08",
-    payment: "نقدًا",
-    status: "مدفوع",
-  },
-  {
-    id: 3,
-    title: "مستلزمات المكتب",
-    category: "المستلزمات",
-    amount: 950,
-    date: "2026-10-12",
-    payment: "بطاقة ائتمان",
-    status: "معلق",
-  },
-  {
-    id: 4,
-    title: "اشتراك الإنترنت",
-    category: "المرافق",
-    amount: 650,
-    date: "2026-10-15",
-    payment: "تحويل بنكي",
-    status: "مدفوع",
-  },
-];
+import { toast } from "sonner";
 
-const categories = [
-  "الإيجار",
-  "المرافق",
-  "المستلزمات",
-  "الرواتب",
-  "التسويق",
-  "المواصلات",
-  "الصيانة",
-  "أخرى",
-];
+import { useDispatch, useSelector } from "react-redux";
+import { setExpensesData  , ExpensesSearch  , deleteExpenseThunk , addExpenseThunk  , updateExpenseThunk} from "../Lip/redux/expensesSlice/expensesSlice";
 
-const paymentMethods = [
-  "نقدًا",
-  "تحويل بنكي",
-  "بطاقة ائتمان",
-  "محفظة إلكترونية",
-];
+
 
 function Expenses() {
-  const [expenses, setExpenses] = useState(initialExpenses);
+
   const [search, setSearch] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
-  const [form, setForm] = useState({
-    title: "",
-    category: "أخرى",
-    amount: "",
-    date: new Date().toISOString().slice(0, 10),
-    payment: "نقدًا",
-    status: "معلق",
-  });
+  const dispatch = useDispatch();
 
-  const totalExpenses = expenses.reduce(
-    (total, expense) => total + Number(expense.amount),
-    0
-  );
+  useEffect(()=>{
+    dispatch(setExpensesData())
+  } , [dispatch])
 
-  const paidExpenses = expenses
-    .filter((expense) => expense.status === "مدفوع")
-    .reduce((total, expense) => total + Number(expense.amount), 0);
 
-  const pendingExpenses = expenses
-    .filter((expense) => expense.status === "معلق")
-    .reduce((total, expense) => total + Number(expense.amount), 0);
+const data = useSelector((state) => state.expenses.data || []);
 
-  const filteredExpenses = expenses.filter((expense) =>
-    `${expense.title} ${expense.category} ${expense.payment}`
-      .toLowerCase()
-      .includes(search.toLowerCase())
-  );
+const searchData = useSelector((state) => state.expenses.search || []);
 
-  const formatMoney = (amount) =>
-    new Intl.NumberFormat("ar-EG", {
-      style: "currency",
-      currency: "EGP",
-      maximumFractionDigits: 2,
-    }).format(amount);
+const [form, setForm] = useState({
+  title: "",
+  category_id: "",
+  amount: "",
+  expense_date: "",
+  payment_method_id: "",
+  status: "Pending",
+});
+
+const handleSearch = (e)=> {
+  e.preventDefault()
+  const value = e.target.value;
+  setSearch(value)
+  if(value.trim() !== ""){
+    dispatch(ExpensesSearch(value))
+  }
+}
+  const filteredExpenses  = search.trim() ? searchData || [] : data  || []
+
+
+const totalExpenses = filteredExpenses.reduce(
+  (total, expense) => total + Number(expense.amount || 0),
+  0
+);
+
+const paidExpenses = filteredExpenses
+  .filter((expense) => expense.status === "Paid")
+  .reduce((total, expense) => total + Number(expense.amount || 0), 0);
+
+const pendingExpenses = filteredExpenses
+  .filter((expense) => expense.status === "Pending")
+  .reduce((total, expense) => total + Number(expense.amount || 0), 0);
+
+const categories = [
+  { id: 1, name: "إيجار الورشة" },
+  { id: 2, name: "الكهرباء والمياه" },
+  { id: 3, name: "الرواتب والأجور" },
+  { id: 4, name: "شراء الخامات" },
+  { id: 5, name: "الصيانة والإصلاحات" },
+  { id: 6, name: "النقل والمواصلات" },
+  { id: 7, name: "الأدوات والمعدات" },
+  { id: 8, name: "مصروفات أخرى" },
+];
+
+const paymentMethods = [
+  { id: 1, name: "نقدًا" },
+  { id: 2, name: "تحويل بنكي" },
+  { id: 3, name: "بطاقة بنكية" },
+  { id: 4, name: "محفظة إلكترونية" },
+];
 
   const openAddForm = () => {
     setEditingId(null);
-    setForm({
-      title: "",
-      category: "أخرى",
-      amount: "",
-      date: new Date().toISOString().slice(0, 10),
-      payment: "نقدًا",
-      status: "معلق",
-    });
+    // setForm({
+    //   title: "",
+    //   category: "أخرى",
+    //   amount: "",
+    //   date: new Date().toISOString().slice(0, 10),
+    //   payment: "نقدًا",
+    //   status: "معلق",
+    // });
     setShowForm(true);
   };
 
-  const openEditForm = (expense) => {
-    setEditingId(expense.id);
-    setForm({
-      title: expense.title,
-      category: expense.category,
-      amount: expense.amount,
-      date: expense.date,
-      payment: expense.payment,
-      status: expense.status,
-    });
-    setShowForm(true);
+const openEditForm = (expense) => {
+  setEditingId(expense.id);
+
+  setForm({
+    title: expense.title ?? "",
+    category_id: expense.category_id ?? "",
+    amount: expense.amount ?? "",
+    expense_date: expense.expense_date?.slice(0, 10) ?? "",
+    payment_method_id: expense.payment_method_id ?? "",
+    status: expense.status ?? "Pending",
+  });
+
+  setShowForm(true);
+};
+
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  // التحقق من الحقول الفارغة
+  if (
+    !form.title.trim() ||
+    !form.category_id ||
+    !form.amount ||
+    !form.expense_date ||
+    !form.payment_method_id ||
+    !form.status
+  ) {
+    toast.error("من فضلك املأ جميع الحقول");
+    return;
+  }
+
+  // التحقق من أن المبلغ أكبر من صفر
+  if (Number(form.amount) <= 0) {
+    toast.error("يجب أن يكون المبلغ أكبر من صفر");
+    return;
+  }
+
+  const expenseData = {
+    title: form.title.trim(),
+    category_id: Number(form.category_id),
+    amount: Number(form.amount),
+    expense_date: form.expense_date,
+    payment_method_id: Number(form.payment_method_id),
+    status: form.status,
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  try {
+    if (editingId) {
+      await dispatch(
+        updateExpenseThunk({
+          id: editingId,
+          ...expenseData,
+        })
+      ).unwrap();
 
-    if (!form.title.trim() || Number(form.amount) <= 0) {
-      alert("من فضلك أدخل اسم المصروف ومبلغًا صحيحًا.");
-      return;
-    }
-
-    if (editingId !== null) {
-      setExpenses((prev) =>
-        prev.map((expense) =>
-          expense.id === editingId
-            ? {
-                ...form,
-                id: editingId,
-                amount: Number(form.amount),
-              }
-            : expense
-        )
-      );
+      toast.success("تم تعديل المصروف بنجاح");
     } else {
-      setExpenses((prev) => [
-        {
-          ...form,
-          id: Date.now(),
-          amount: Number(form.amount),
-        },
-        ...prev,
-      ]);
+      await dispatch(addExpenseThunk(expenseData)).unwrap();
+
+      toast.success("تم إضافة المصروف بنجاح");
     }
 
     setShowForm(false);
     setEditingId(null);
-  };
+
+    setForm({
+      title: "",
+      category_id: "",
+      amount: "",
+      expense_date: "",
+      payment_method_id: "",
+      status: "Pending",
+    });
+  } catch (error) {
+toast.error(
+  typeof error === "string"
+    ? error
+    : error?.message || "حدث خطأ أثناء إضافة المصروف"
+);
+  }
+};
+
 
   const deleteExpense = (id) => {
-    if (window.confirm("هل أنت متأكد من حذف هذا المصروف؟")) {
-      setExpenses((prev) =>
-        prev.filter((expense) => expense.id !== id)
-      );
-    }
+ try{
+  dispatch(deleteExpenseThunk(id))
+ }catch(error){
+  console.log(error)
+ }
   };
 
   return (
@@ -204,7 +219,7 @@ function Expenses() {
           </div>
           <div>
             <p>إجمالي المصروفات</p>
-            <h2>{formatMoney(totalExpenses)}</h2>
+            <h2>{totalExpenses} ج.م.</h2>
             <span>جميع المصروفات المسجلة</span>
           </div>
         </div>
@@ -215,7 +230,7 @@ function Expenses() {
           </div>
           <div>
             <p>المصروفات المدفوعة</p>
-            <h2>{formatMoney(paidExpenses)}</h2>
+            <h2>{paidExpenses} ج.م.</h2>
             <span>إجمالي المبالغ المدفوعة</span>
           </div>
         </div>
@@ -226,7 +241,7 @@ function Expenses() {
           </div>
           <div>
             <p>المصروفات المعلقة</p>
-            <h2>{formatMoney(pendingExpenses)}</h2>
+            <h2>{pendingExpenses} ج.م.</h2>
             <span>مبالغ في انتظار الدفع</span>
           </div>
         </div>
@@ -237,7 +252,7 @@ function Expenses() {
           </div>
           <div>
             <p>عدد المصروفات</p>
-            <h2>{expenses.length}</h2>
+            <h2>{filteredExpenses.length}</h2>
             <span>عدد السجلات المسجلة</span>
           </div>
         </div>
@@ -256,120 +271,132 @@ function Expenses() {
               type="text"
               placeholder="ابحث عن مصروف..."
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={handleSearch}
             />
           </div>
         </div>
 
-        {showForm && (
-          <form className="expense-form" onSubmit={handleSubmit}>
-            <h3>
-              {editingId !== null
-                ? "تعديل المصروف"
-                : "إضافة مصروف جديد"}
-            </h3>
+{showForm && (
+  <form className="expense-form" onSubmit={handleSubmit}>
+    <h3>
+      {editingId !== null
+        ? "تعديل المصروف"
+        : "إضافة مصروف جديد"}
+    </h3>
 
-            <div className="expense-form-grid">
-              <label>
-                اسم المصروف
-                <input
-                  type="text"
-                  placeholder="مثال: إيجار المكتب"
-                  value={form.title}
-                  onChange={(e) =>
-                    setForm({ ...form, title: e.target.value })
-                  }
-                  required
-                />
-              </label>
+    <div className="expense-form-grid">
 
-              <label>
-                التصنيف
-                <select
-                  value={form.category}
-                  onChange={(e) =>
-                    setForm({ ...form, category: e.target.value })
-                  }
-                >
-                  {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
-              </label>
+      {/* Expense Title */}
+      <label>
+        اسم المصروف
+        <input
+          type="text"
+          placeholder="مثال: إيجار المكتب"
+          value={form.title}
+          onChange={(e) =>
+            setForm({ ...form, title: e.target.value })
+          }
+      
+        />
+      </label>
 
-              <label>
-                المبلغ (جنيه)
-                <input
-                  type="number"
-                  min="0.01"
-                  step="0.01"
-                  placeholder="أدخل المبلغ"
-                  value={form.amount}
-                  onChange={(e) =>
-                    setForm({ ...form, amount: e.target.value })
-                  }
-                  required
-                />
-              </label>
+      {/* Category */}
+      <label>
+        التصنيف
+        <select
+          value={form.category_id}
+          onChange={(e) =>
+            setForm({ ...form, category_id: e.target.value })
+          }
+      
+        >
+          <option value="">اختر التصنيف</option>
 
-              <label>
-                التاريخ
-                <input
-                  type="date"
-                  value={form.date}
-                  onChange={(e) =>
-                    setForm({ ...form, date: e.target.value })
-                  }
-                  required
-                />
-              </label>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </label>
 
-              <label>
-                طريقة الدفع
-                <select
-                  value={form.payment}
-                  onChange={(e) =>
-                    setForm({ ...form, payment: e.target.value })
-                  }
-                >
-                  {paymentMethods.map((method) => (
-                    <option key={method} value={method}>
-                      {method}
-                    </option>
-                  ))}
-                </select>
-              </label>
+      {/* Amount */}
+      <label>
+        المبلغ (جنيه)
+        <input
+          type="number"
+          min="0.01"
+          step="0.01"
+          placeholder="أدخل المبلغ"
+          value={form.amount}
+          onChange={(e) =>
+            setForm({ ...form, amount: e.target.value })
+          }
+ 
+        />
+      </label>
 
-              <label>
-                حالة الدفع
-                <select
-                  value={form.status}
-                  onChange={(e) =>
-                    setForm({ ...form, status: e.target.value })
-                  }
-                >
-                  <option value="معلق">معلق</option>
-                  <option value="مدفوع">مدفوع</option>
-                </select>
-              </label>
-            </div>
+      {/* Expense Date */}
+      <label>
+        التاريخ
+        <input
+          type="date"
+          value={form.expense_date}
+          onChange={(e) =>
+            setForm({ ...form, expense_date: e.target.value })
+          }
+        />
+      </label>
 
-            <div className="expense-form-actions">
-              <button
-                type="button"
-                onClick={() => setShowForm(false)}
-              >
-                إلغاء
-              </button>
+      {/* Payment Method */}
+      <label>
+        طريقة الدفع
+        <select
+          value={form.payment_method_id}
+          onChange={(e) =>
+            setForm({ ...form, payment_method_id: e.target.value })
+          }
+        >
+          <option value="">اختر طريقة الدفع</option>
+ 
+          {paymentMethods.map((method) => (
+            <option key={method.id} value={method.id}>
+              {method.name}
+            </option>
+          ))}
+        </select>
+      </label>
 
-              <button type="submit" className="expense-save-btn">
-                {editingId !== null ? "حفظ التعديلات" : "إضافة المصروف"}
-              </button>
-            </div>
-          </form>
-        )}
+      {/* Status */}
+      <label>
+        حالة الدفع
+        <select
+          value={form.status}
+          onChange={(e) =>
+            setForm({ ...form, status: e.target.value })
+          }
+        >
+          <option value="Pending">معلق</option>
+          <option value="Paid">مدفوع</option>
+        </select>
+      </label>
+
+    </div>
+
+    <div className="expense-form-actions">
+      <button
+        type="button"
+        onClick={() => setShowForm(false)}
+      >
+        إلغاء
+      </button>
+
+      <button type="submit" className="expense-save-btn">
+        {editingId !== null ? "حفظ التعديلات" : "إضافة المصروف"}
+      </button>
+    </div>
+  </form>
+)}
 
         <div className="expenses-table-wrapper">
           <table className="expenses-table">
@@ -384,83 +411,81 @@ function Expenses() {
                 <th>الإجراءات</th>
               </tr>
             </thead>
+<tbody>
+  {filteredExpenses?.map((expense) => (
+    <tr key={expense.id}>
+      <td>
+        <div className="expense-title-cell">
+          <div className="expense-row-icon">
+            <FaReceipt />
+          </div>
+          <strong>{expense.title}</strong>
+        </div>
+      </td>
 
-            <tbody>
-              {filteredExpenses.map((expense) => (
-                <tr key={expense.id}>
-                  <td>
-                    <div className="expense-title-cell">
-                      <div className="expense-row-icon">
-                        <FaReceipt />
-                      </div>
-                      <strong>{expense.title}</strong>
-                    </div>
-                  </td>
+      <td>
+        <span className="expense-category">
+          {expense.category_id}
+        </span>
+      </td>
 
-                  <td>
-                    <span className="expense-category">
-                      {expense.category}
-                    </span>
-                  </td>
+      <td>{expense.expense_date}</td>
 
-                  <td>{expense.date}</td>
-                  <td>{expense.payment}</td>
+      <td>{expense.status}</td>
 
-                  <td className="expense-amount">
-                    {formatMoney(expense.amount)}
-                  </td>
+      <td className="expense-amount">
+        {expense.amount}
+      </td>
 
-                  <td>
-                    <span
-                      className={`expense-status ${
-                        expense.status === "مدفوع"
-                          ? "paid"
-                          : "pending"
-                      }`}
-                    >
-                      {expense.status}
-                    </span>
-                  </td>
+      <td>
+        <span
+          className={`expense-status ${
+            expense.status === "Paid" ? "paid" : "pending"
+          }`}
+        >
+          {expense.status === "Paid" ? "مدفوع" : "معلق"}
+        </span>
+      </td>
 
-                  <td>
-                    <div className="expense-actions">
-                      <button
-                        type="button"
-                        className="expense-edit-btn"
-                        onClick={() => openEditForm(expense)}
-                        title="تعديل المصروف"
-                        aria-label="تعديل المصروف"
-                      >
-                        <FaEdit />
-                      </button>
+      <td>
+        <div className="expense-actions">
+          <button
+            type="button"
+            className="expense-edit-btn"
+            onClick={() => openEditForm(expense)}
+            title="تعديل المصروف"
+            aria-label="تعديل المصروف"
+          >
+            <FaEdit />
+          </button>
 
-                      <button
-                        type="button"
-                        className="expense-delete-btn"
-                        onClick={() => deleteExpense(expense.id)}
-                        title="حذف المصروف"
-                        aria-label="حذف المصروف"
-                      >
-                        <FaTrash />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+          <button
+            type="button"
+            className="expense-delete-btn"
+            onClick={() => deleteExpense(expense.id)}
+            title="حذف المصروف"
+            aria-label="حذف المصروف"
+          >
+            <FaTrash />
+          </button>
+        </div>
+      </td>
+    </tr>
+  ))}
 
-              {filteredExpenses.length === 0 && (
-                <tr>
-                  <td colSpan="7" className="expense-empty">
-                    لا توجد مصروفات مطابقة لبحثك.
-                  </td>
-                </tr>
-              )}
-            </tbody>
+  {filteredExpenses.length === 0 && (
+    <tr>
+      <td colSpan="7" className="expense-empty">
+        لا توجد مصروفات مطابقة لبحثك.
+      </td>
+    </tr>
+  )}
+</tbody>
           </table>
         </div>
 
         <div className="expenses-footer">
-          عرض {filteredExpenses.length} من أصل {expenses.length} مصروفات
+          عرض {filteredExpenses.length} من أصل {filteredExpenses.length} مصروفات
         </div>
       </div>
     </div>

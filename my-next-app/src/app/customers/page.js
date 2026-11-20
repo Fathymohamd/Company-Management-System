@@ -43,7 +43,7 @@ const dispatch = useDispatch()
 
 
 const data = useSelector((state) => state.customers.data)
-
+console.log(data)
 const searchResults = useSelector(
   (state) => state.customers.Search
 );

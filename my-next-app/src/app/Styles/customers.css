@@ -2,8 +2,8 @@
 .customers-page {
   min-height: 100vh;
   padding: 32px;
-  background: #f6f8fb;
-  color: #1e293b;
+  background: #f4f7f5;
+  color: #183d2d;
   font-family: inherit;
 }
 
@@ -19,12 +19,13 @@
   margin: 14px 0 8px;
   font-size: 28px;
   font-weight: 800;
+  color: #183d2d;
 }
 
 .customers-header p,
 .customers-content-heading p {
   margin: 0;
-  color: #8490a3;
+  color: #84968b;
   font-size: 14px;
 }
 
@@ -32,7 +33,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: #64748b;
+  color: #718578;
   font-size: 13px;
   text-decoration: none;
 }
@@ -45,7 +46,7 @@
   padding: 12px 18px;
   border: none;
   border-radius: 10px;
-  background: #2563eb;
+  background: #267653;
   color: white;
   font-size: 14px;
   font-weight: 700;
@@ -55,7 +56,7 @@
 
 .customer-add-button:hover,
 .customer-save-button:hover {
-  background: #1d4ed8;
+  background: #19583c;
 }
 
 .customers-stats {
@@ -68,9 +69,9 @@
 .customer-stat-card {
   padding: 22px;
   background: white;
-  border: 1px solid #edf0f5;
+  border: 1px solid #e7eee9;
   border-radius: 14px;
-  box-shadow: 0 3px 12px rgb(15 23 42 / 3%);
+  box-shadow: 0 3px 12px rgba(24, 61, 45, 0.03);
 }
 
 .customer-stat-icon {
@@ -83,14 +84,11 @@
   border-radius: 12px;
 }
 
-.customer-stat-icon.blue {
-  color: #2563eb;
-  background: #eff6ff;
-}
-
-.customer-stat-icon.green {
-  color: #059669;
-  background: #ecfdf5;
+.customer-stat-icon.blue,
+.customer-stat-icon.green,
+.customer-stat-icon.purple {
+  color: #267653;
+  background: #eff6f1;
 }
 
 .customer-stat-icon.orange {
@@ -98,15 +96,10 @@
   background: #fffbeb;
 }
 
-.customer-stat-icon.purple {
-  color: #7c3aed;
-  background: #f5f3ff;
-}
-
 .customer-stat-card > span {
   display: block;
   margin-bottom: 10px;
-  color: #718096;
+  color: #718578;
   font-size: 13px;
 }
 
@@ -114,15 +107,16 @@
   margin: 0;
   font-size: 25px;
   font-weight: 800;
+  color: #183d2d;
   overflow-wrap: anywhere;
 }
 
 .customers-content {
   padding: 24px;
   background: white;
-  border: 1px solid #edf0f5;
+  border: 1px solid #e7eee9;
   border-radius: 14px;
-  box-shadow: 0 3px 12px rgb(15 23 42 / 3%);
+  box-shadow: 0 3px 12px rgba(24, 61, 45, 0.03);
 }
 
 .customers-content-heading {
@@ -136,13 +130,14 @@
 .customers-content-heading h2 {
   margin: 0 0 8px;
   font-size: 19px;
+  color: #183d2d;
 }
 
 .customers-count {
   padding: 7px 12px;
   border-radius: 8px;
-  background: #eff6ff;
-  color: #2563eb;
+  background: #eff6f1;
+  color: #267653;
   font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
@@ -155,14 +150,14 @@
   max-width: 480px;
   margin-bottom: 22px;
   padding: 0 13px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e7eee9;
   border-radius: 10px;
-  color: #94a3b8;
+  color: #84968b;
 }
 
 .customers-search:focus-within {
-  border-color: #93b4fc;
-  box-shadow: 0 0 0 3px rgb(37 99 235 / 8%);
+  border-color: #267653;
+  box-shadow: 0 0 0 3px rgba(38, 118, 83, 0.08);
 }
 
 .customers-search input {
@@ -172,7 +167,7 @@
   border: none;
   outline: none;
   background: transparent;
-  color: #1e293b;
+  color: #183d2d;
   font: inherit;
   font-size: 13px;
 }
@@ -191,16 +186,16 @@
 
 .customers-table th {
   padding: 15px 12px;
-  background: #f8fafc;
-  color: #64748b;
+  background: #f4f7f5;
+  color: #718578;
   font-size: 12px;
   font-weight: 700;
 }
 
 .customers-table td {
   padding: 17px 12px;
-  border-bottom: 1px solid #f0f2f6;
-  color: #475569;
+  border-bottom: 1px solid #e7eee9;
+  color: #475d50;
   font-size: 13px;
 }
 
@@ -209,14 +204,14 @@
 }
 
 .customers-table tbody tr:hover {
-  background: #fbfdff;
+  background: #f8fbf9;
 }
 
 .customer-name-cell {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #1e293b;
+  color: #183d2d;
 }
 
 .customer-avatar {
@@ -227,8 +222,8 @@
   height: 38px;
   flex-shrink: 0;
   border-radius: 11px;
-  background: #eff6ff;
-  color: #2563eb;
+  background: #eff6f1;
+  color: #267653;
   font-size: 17px;
   font-weight: 800;
 }
@@ -237,16 +232,16 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: #64748b;
+  color: #718578;
 }
 
 .customer-contact svg {
   flex-shrink: 0;
-  color: #94a3b8;
+  color: #84968b;
 }
 
 .customer-total {
-  color: #059669 !important;
+  color: #267653 !important;
   font-weight: 700;
 }
 
@@ -269,10 +264,11 @@
 
 .customers-empty {
   padding: 35px !important;
-  color: #94a3b8 !important;
+  color: #84968b !important;
   text-align: center;
 }
 
+/* Modal */
 .customer-modal-overlay {
   position: fixed;
   inset: 0;
@@ -281,7 +277,7 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgb(15 23 42 / 50%);
+  background: rgba(24, 61, 45, 0.5);
   overflow-y: auto;
 }
 
@@ -293,7 +289,7 @@
   padding: 25px;
   border-radius: 16px;
   background: white;
-  box-shadow: 0 20px 60px rgb(15 23 42 / 20%);
+  box-shadow: 0 20px 60px rgba(24, 61, 45, 0.2);
 }
 
 .customer-modal-header {
@@ -307,11 +303,12 @@
 .customer-modal-header h2 {
   margin: 0 0 8px;
   font-size: 21px;
+  color: #183d2d;
 }
 
 .customer-modal-header p {
   margin: 0;
-  color: #94a3b8;
+  color: #84968b;
   font-size: 13px;
 }
 
@@ -324,8 +321,8 @@
   flex-shrink: 0;
   border: none;
   border-radius: 9px;
-  background: #f1f5f9;
-  color: #64748b;
+  background: #eff6f1;
+  color: #718578;
   cursor: pointer;
 }
 
@@ -337,7 +334,7 @@
 .customer-modal form label {
   display: grid;
   gap: 8px;
-  color: #334155;
+  color: #183d2d;
   font-size: 13px;
   font-weight: 700;
 }
@@ -346,15 +343,17 @@
   width: 100%;
   box-sizing: border-box;
   padding: 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e7eee9;
   border-radius: 9px;
   outline: none;
+  background: white;
+  color: #183d2d;
   font: inherit;
   font-size: 13px;
 }
 
 .customer-modal form input:focus {
-  border-color: #2563eb;
+  border-color: #267653;
 }
 
 .customer-modal-actions {
@@ -370,18 +369,18 @@
   justify-content: center;
   gap: 7px;
   padding: 11px 17px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e7eee9;
   border-radius: 9px;
   background: white;
-  color: #475569;
+  color: #475d50;
   font: inherit;
   font-size: 13px;
   cursor: pointer;
 }
 
 .customer-modal-actions .customer-save-button {
-  border-color: #2563eb;
-  background: #2563eb;
+  border-color: #267653;
+  background: #267653;
   color: white;
   font-weight: 700;
 }

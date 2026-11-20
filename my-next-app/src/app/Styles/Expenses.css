@@ -1,16 +1,16 @@
 
+/* Expenses Page */
 
 .expenses-page {
   direction: rtl;
   text-align: right;
   padding: 28px;
   min-height: 100vh;
-  background: #f7f8fc;
-  color: #202438;
+  background: #f4f7f5;
+  color: #183d2d;
   font-family: Arial, sans-serif;
   box-sizing: border-box;
 }
-
 
 .expenses-header {
   display: flex;
@@ -24,17 +24,19 @@
   margin: 0 0 8px;
   font-size: 28px;
   font-weight: 700;
+  color: #183d2d;
 }
 
 .expenses-header p,
 .expenses-toolbar p {
   margin: 0;
-  color: #858ba0;
+  color: #718578;
   font-size: 14px;
   line-height: 1.8;
 }
 
-/* الأزرار الرئيسية */
+/* Main Buttons */
+
 .expense-add-btn,
 .expense-save-btn {
   display: inline-flex;
@@ -44,7 +46,7 @@
   padding: 12px 18px;
   border: none;
   border-radius: 9px;
-  background: #635bdb;
+  background: #267653;
   color: white;
   font-size: 14px;
   font-weight: 600;
@@ -55,11 +57,12 @@
 
 .expense-add-btn:hover,
 .expense-save-btn:hover {
-  background: #5148c7;
+  background: #19583c;
   transform: translateY(-1px);
 }
 
-/* بطاقات الإحصائيات */
+/* Statistics Cards */
+
 .expenses-stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -74,9 +77,9 @@
   min-width: 0;
   padding: 22px 18px;
   background: #fff;
-  border: 1px solid #eceef5;
+  border: 1px solid #e7eee9;
   border-radius: 14px;
-  box-shadow: 0 4px 15px rgba(30, 35, 90, 0.035);
+  box-shadow: 0 4px 15px rgba(24, 61, 45, 0.035);
 }
 
 .expense-stat-icon {
@@ -91,13 +94,13 @@
 }
 
 .expense-stat-icon.purple {
-  color: #635bdb;
-  background: #eeecff;
+  color: #267653;
+  background: #eff6f1;
 }
 
 .expense-stat-icon.green {
-  color: #179b68;
-  background: #e4f8ef;
+  color: #267653;
+  background: #dceee3;
 }
 
 .expense-stat-icon.orange {
@@ -106,13 +109,13 @@
 }
 
 .expense-stat-icon.blue {
-  color: #3485e9;
-  background: #e6f1ff;
+  color: #267653;
+  background: #eff6f1;
 }
 
 .expense-stat-card p {
   margin: 0 0 8px;
-  color: #81879a;
+  color: #718578;
   font-size: 13px;
   line-height: 1.7;
 }
@@ -120,23 +123,25 @@
 .expense-stat-card h2 {
   margin: 0 0 7px;
   font-size: 20px;
+  color: #183d2d;
   overflow-wrap: anywhere;
   direction: rtl;
 }
 
 .expense-stat-card span {
-  color: #a0a5b5;
+  color: #84968b;
   font-size: 11px;
   line-height: 1.7;
 }
 
-/* محتوى المصروفات */
+/* Expenses Content */
+
 .expenses-content {
   padding: 24px;
   background: white;
-  border: 1px solid #eceef5;
+  border: 1px solid #e7eee9;
   border-radius: 14px;
-  box-shadow: 0 4px 15px rgba(30, 35, 90, 0.035);
+  box-shadow: 0 4px 15px rgba(24, 61, 45, 0.035);
 }
 
 .expenses-toolbar {
@@ -150,9 +155,11 @@
 .expenses-toolbar h2 {
   margin: 0 0 8px;
   font-size: 20px;
+  color: #183d2d;
 }
 
-/* البحث */
+/* Search */
+
 .expense-search {
   display: flex;
   align-items: center;
@@ -160,11 +167,17 @@
   width: 280px;
   max-width: 100%;
   padding: 11px 14px;
-  color: #9298aa;
-  background: #f8f9fc;
-  border: 1px solid #e9ebf3;
+  color: #84968b;
+  background: #f8fbf9;
+  border: 1px solid #e1ebe4;
   border-radius: 9px;
   box-sizing: border-box;
+  transition: 0.2s;
+}
+
+.expense-search:focus-within {
+  border-color: #267653;
+  box-shadow: 0 0 0 3px rgba(38, 118, 83, 0.08);
 }
 
 .expense-search input {
@@ -173,7 +186,7 @@
   border: none;
   outline: none;
   background: transparent;
-  color: #202438;
+  color: #183d2d;
   font-family: inherit;
   font-size: 13px;
   text-align: right;
@@ -181,21 +194,23 @@
 }
 
 .expense-search input::placeholder {
-  color: #9298aa;
+  color: #94a69a;
 }
 
-/* نموذج إضافة وتعديل المصروفات */
+/* Expense Form */
+
 .expense-form {
   margin-bottom: 25px;
   padding: 22px;
-  background: #fafaff;
-  border: 1px solid #e7e6fa;
+  background: #f8fbf9;
+  border: 1px solid #e1ebe4;
   border-radius: 12px;
 }
 
 .expense-form h3 {
   margin: 0 0 20px;
   font-size: 18px;
+  color: #183d2d;
 }
 
 .expense-form-grid {
@@ -208,7 +223,7 @@
   display: flex;
   flex-direction: column;
   gap: 9px;
-  color: #51566b;
+  color: #334f40;
   font-size: 13px;
   font-weight: 600;
   line-height: 1.7;
@@ -220,24 +235,26 @@
   min-width: 0;
   box-sizing: border-box;
   padding: 12px;
-  border: 1px solid #e2e5ef;
+  border: 1px solid #dce7df;
   border-radius: 8px;
   outline: none;
   background: white;
-  color: #303449;
+  color: #334f40;
   font-family: inherit;
   font-size: 13px;
   text-align: right;
   direction: rtl;
+  transition: 0.2s;
 }
 
 .expense-form-grid input:focus,
 .expense-form-grid select:focus {
-  border-color: #635bdb;
-  box-shadow: 0 0 0 3px rgba(99, 91, 219, 0.1);
+  border-color: #267653;
+  box-shadow: 0 0 0 3px rgba(38, 118, 83, 0.08);
 }
 
-/* أزرار النموذج */
+/* Form Buttons */
+
 .expense-form-actions {
   display: flex;
   justify-content: flex-start;
@@ -247,10 +264,10 @@
 
 .expense-form-actions button {
   padding: 11px 17px;
-  border: 1px solid #e0e3ed;
+  border: 1px solid #dce7df;
   border-radius: 8px;
   background: white;
-  color: #51566b;
+  color: #475f50;
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -259,20 +276,21 @@
 }
 
 .expense-form-actions button:hover {
-  background: #f1f2f8;
+  background: #eff6f1;
 }
 
 .expense-form-actions .expense-save-btn {
   border: none;
-  background: #635bdb;
+  background: #267653;
   color: white;
 }
 
 .expense-form-actions .expense-save-btn:hover {
-  background: #5148c7;
+  background: #19583c;
 }
 
-/* جدول المصروفات */
+/* Expenses Table */
+
 .expenses-table-wrapper {
   width: 100%;
   overflow-x: auto;
@@ -286,32 +304,38 @@
 
 .expenses-table th {
   padding: 15px 14px;
-  background: #f8f9fc;
-  color: #777e93;
+  background: #f4f7f5;
+  color: #718578;
   text-align: right;
   font-size: 12px;
   font-weight: 600;
+  border-bottom: 1px solid #e7eee9;
 }
 
 .expenses-table td {
   padding: 16px 14px;
-  border-bottom: 1px solid #f0f1f6;
-  color: #62687d;
+  border-bottom: 1px solid #edf2ee;
+  color: #52675a;
   font-size: 13px;
   text-align: right;
   vertical-align: middle;
 }
 
-.expenses-table tbody tr:hover {
-  background: #fcfcff;
+.expenses-table tbody tr {
+  transition: background 0.2s;
 }
 
-/* اسم المصروف */
+.expenses-table tbody tr:hover {
+  background: #f8fbf9;
+}
+
+/* Expense Title */
+
 .expense-title-cell {
   display: flex;
   align-items: center;
   gap: 11px;
-  color: #292d42;
+  color: #183d2d;
 }
 
 .expense-row-icon {
@@ -322,26 +346,27 @@
   width: 36px;
   height: 36px;
   border-radius: 9px;
-  background: #f0efff;
-  color: #635bdb;
+  background: #eff6f1;
+  color: #267653;
 }
 
 .expense-category {
   display: inline-block;
   padding: 6px 10px;
   border-radius: 6px;
-  background: #f1f2f8;
-  color: #666d83;
+  background: #eff6f1;
+  color: #267653;
   font-size: 12px;
 }
 
 .expenses-table .expense-amount {
-  color: #252940;
+  color: #183d2d;
   font-weight: 700;
   direction: rtl;
 }
 
-/* حالة الدفع */
+/* Payment Status */
+
 .expense-status {
   display: inline-block;
   padding: 6px 11px;
@@ -351,8 +376,8 @@
 }
 
 .expense-status.paid {
-  background: #e4f8ee;
-  color: #168456;
+  background: #dceee3;
+  color: #267653;
 }
 
 .expense-status.pending {
@@ -360,7 +385,8 @@
   color: #cb8123;
 }
 
-/* أزرار التعديل والحذف */
+/* Edit and Delete Buttons */
+
 .expense-actions {
   display: flex;
   align-items: center;
@@ -381,12 +407,12 @@
 }
 
 .expense-edit-btn {
-  background: #eeedff;
-  color: #635bdb;
+  background: #eff6f1;
+  color: #267653;
 }
 
 .expense-edit-btn:hover {
-  background: #dedbff;
+  background: #dceee3;
 }
 
 .expense-delete-btn {
@@ -398,22 +424,25 @@
   background: #ffdddd;
 }
 
-/* عدم وجود نتائج */
+/* Empty Results */
+
 .expenses-table .expense-empty {
   padding: 40px 15px;
   text-align: center;
-  color: #9298aa;
+  color: #84968b;
   white-space: normal;
 }
 
-/* أسفل الجدول */
+/* Table Footer */
+
 .expenses-footer {
   padding-top: 18px;
-  color: #9298aa;
+  color: #84968b;
   font-size: 12px;
 }
 
-/* الشاشات المتوسطة */
+/* Medium Screens */
+
 @media (max-width: 1200px) {
   .expenses-stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -424,7 +453,8 @@
   }
 }
 
-/* الهواتف */
+/* Mobile */
+
 @media (max-width: 650px) {
   .expenses-page {
     padding: 16px;

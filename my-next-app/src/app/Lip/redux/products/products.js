@@ -22,12 +22,13 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+
 export const searchProducts = createAsyncThunk(
   "products/searchProducts",
   async (name, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `${API_URL}/Search?name=${encodeURIComponent(name)}`
+        `${API_URL}/search?name=${encodeURIComponent(name)}`
       );
 
       const result = await response.json();
@@ -38,14 +39,14 @@ export const searchProducts = createAsyncThunk(
         );
       }
 
-      return result;
-    } catch (error) {
-      console.error("Search Error:", error);
+      return result.data;
 
+    } catch (error) {
       return rejectWithValue("تعذر الاتصال بالسيرفر");
     }
   }
 );
+
 
 // 3. إضافة منتج
 export const addProduct = createAsyncThunk(
@@ -170,7 +171,7 @@ const productsSlice = createSlice({
       })
       .addCase(searchProducts.fulfilled, (state, action) => {
         state.loading = false;
-        state.search = action.payload.data || [];
+        state.search = action.payload || [];
       })
       .addCase(searchProducts.rejected, (state, action) => {
         state.loading = false;

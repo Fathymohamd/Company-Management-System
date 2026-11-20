@@ -37,6 +37,7 @@ export default function OrdersPage() {
   useEffect(()=>{
     dispatch(customer_orders())
     dispatch(productName())
+
   } , [dispatch])
 
 
@@ -83,6 +84,7 @@ if(value.trim() !== "") {
 }
 
 const filteredOrders = ((search.trim() ? product : order)
+
 ).filter((item) =>
   selectedStatus === "الكل" || item.status === selectedStatus
 );

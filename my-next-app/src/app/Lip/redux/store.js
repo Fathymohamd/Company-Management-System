@@ -18,6 +18,18 @@ import products from "./products/products";
 
 import materialsReducer from "./materialsSlice/materialsSlice";
 
+import expensesReducer from "./expensesSlice/expensesSlice";
+
+import reportsReducer from "./reports/reportsSlice";
+
+import RegisterPage from "./RegisterPages/RegisterPage";
+
+import LoginPages from "./LoginPages/LoginPages";
+
+import me from "./me/me";
+
+import reportsSlice from "./reports/reportsSlice";
+
 export const store = configureStore({
   reducer: {
     employees: employeesReducer,
@@ -37,5 +49,17 @@ export const store = configureStore({
     products : products,
 
     materials: materialsReducer,
+
+    expenses: expensesReducer,
+
+    reports: reportsReducer,
+    
+    register : RegisterPage,
+
+    login : LoginPages,
+
+    userToken : me,
+
+    reports : reportsSlice
   },
 });
