@@ -1,7 +1,12 @@
 
 import express from "express";
+
 import cors from "cors";
+
 import "dotenv/config";
+
+import cookieParser from "cookie-parser";
+
 
 import employees from "./routes/employees.js";
 
@@ -47,16 +52,45 @@ import addMaterial from "./routes/addMaterial.js";
 
 import updateMaterial from "./routes/updateMaterial.js";
 
+import expensesSlice from "./routes/expensesSlice.js";
+
+import ExpensesSearch from "./routes/ExpensesSearch.js";
+
+import deleteExpenseThunk from "./routes/deleteExpenseThunk.js";
+
+import addExpenseThunk from "./routes/addExpenseThunk.js";
+
+import updateExpenseThunk from "./routes/updateExpenseThunk.js";
+
+import reports from "./routes/reports.js";
+
+import register from "./routes/register.js";
+
+import login from "./routes/login.js";
+
+import meRouter from "./routes/me.js";
+
+import reportsRouter from "./routes/reports.js";
+
+
+
 const app = express();
+
+app.use(cookieParser());
+
 
 app.use(
   cors({
-    origin:[
-"http://localhost:3000",
-  "https://company-management-system-rsxw.vercel.app"
-    ] 
+    origin: [
+      "http://localhost:3000",
+      "https://company-management-system-rsxw.vercel.app",
+    ],
+    credentials: true,
   })
 );
+
+
+
 app.use(express.json());
 
 // Routes
@@ -103,8 +137,29 @@ app.use("/api/materials", deleteMaterial)
 
 app.use("/api/materials", addMaterial)
 
-
 app.use("/api/materials", updateMaterial)
+
+app.use("/api/expenses", expensesSlice)
+
+app.use("/api/expenses", ExpensesSearch)
+
+app.use("/api/expenses", deleteExpenseThunk)
+
+app.use("/api/expenses", deleteExpenseThunk)
+
+app.use("/api/expenses", addExpenseThunk)
+
+app.use("/api/expenses", updateExpenseThunk)
+
+app.use("/api/reports", reports)
+
+app.use("/api/auth/register", register)
+
+app.use("/api/auth/login", login)
+
+app.use("/api/auth/me", meRouter);
+
+app.use("/api/reports", reportsRouter);
 
 app.get("/", (req, res) => {
   res.send("Company API is running");
