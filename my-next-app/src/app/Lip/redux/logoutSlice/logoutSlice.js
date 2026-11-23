@@ -1,8 +1,8 @@
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const API_URL = "http://localhost:8080"
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+// const API_URL = "http://localhost:8080"
 
 
 export const LogoutUser = createAsyncThunk(
