@@ -29,6 +29,7 @@ export const GetCurrentUser = createAsyncThunk(
 const initialState = {
   user: null,
   loading: false,
+  initialized: false,
   error: null,
   success: false,
 };
@@ -39,18 +40,31 @@ initialState,
 
 name : "userToken",
 
+ reducers: {
+  clearCurrentUser: (state) => {
+   state.user = null;
+   state.loading = false;
+   state.initialized = true;
+   state.error = null;
+   state.success = false;
+  },
+ },
+
  extraReducers: (builder) => {
   builder
 
     .addCase(GetCurrentUser.pending, (state) => {
       state.loading = true;
+      state.initialized = false;
     })
     .addCase(GetCurrentUser.fulfilled, (state, action) => {
       state.loading = false;
+      state.initialized = true;
       state.user = action.payload;
     })
     .addCase(GetCurrentUser.rejected, (state) => {
       state.loading = false;
+      state.initialized = true;
       state.user = null;
     });
 }
@@ -58,6 +72,7 @@ name : "userToken",
 
 })
 
+export const { clearCurrentUser } = users.actions;
 
 export default users.reducer
 

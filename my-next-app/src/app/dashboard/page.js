@@ -31,6 +31,7 @@ import {  customer_orders , productName } from "../Lip/redux/customer_orders/cus
 import {  LoginPages } from "../Lip/redux/LoginPages/LoginPages"
 
 import {LogoutUser} from "../Lip/redux/logoutSlice/logoutSlice"
+import { clearCurrentUser } from "../Lip/redux/me/me"
 
 const navigation = [
   { label: "لوحة التحكم", icon: LayoutDashboard, href: "/" },
@@ -135,9 +136,8 @@ const handleSearch = (e) => {
 const handleLogout = async () => {
   try {
     await dispatch(LogoutUser()).unwrap();
-
-setTimeout(() => {router.replace("/from/login");} , 3000)
- 
+    dispatch(clearCurrentUser());
+  
   } catch (error) {
     console.log("Logout Error:", error);
   }
