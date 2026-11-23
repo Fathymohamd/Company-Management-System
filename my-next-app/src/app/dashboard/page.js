@@ -30,6 +30,8 @@ import {  customer_orders , productName } from "../Lip/redux/customer_orders/cus
 
 import {  LoginPages } from "../Lip/redux/LoginPages/LoginPages"
 
+import {LogoutUser} from "../Lip/redux/logoutSlice/logoutSlice"
+
 const navigation = [
   { label: "لوحة التحكم", icon: LayoutDashboard, href: "/" },
   { label: "الطلبات", icon: ClipboardList, href: "/orders" },
@@ -41,14 +43,16 @@ const navigation = [
   { label: "التقارير", icon: ChartNoAxesCombined, href: "/reports"},
 ];
 
+import { useRouter } from "next/navigation";
+
 export default function Home() {
    const [searchTerm, setSearchTerm] = useState("");
-
+  
+   const router = useRouter()
   const dispatch = useDispatch()
 
 const user = useSelector((state) => state.userToken.user)
 
-console.log(user)
 
 useEffect(() => {
   dispatch(fetchOrders());
@@ -128,9 +132,16 @@ const handleSearch = (e) => {
     ? product
     : order;
 
-const handleLogout = ()=>{
+const handleLogout = async () => {
+  try {
+    await dispatch(LogoutUser()).unwrap();
 
-}
+setTimeout(() => {router.replace("/from/login");} , 3000)
+ 
+  } catch (error) {
+    console.log("Logout Error:", error);
+  }
+};
 
   return (
     <div className="dashboard" dir="rtl">

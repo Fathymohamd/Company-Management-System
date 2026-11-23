@@ -62,8 +62,8 @@ const handleSubmit = async (e) => {
 
   try {
     const result = await dispatch(LoginPages(formData)).unwrap();
-
-    toast.success(result.message);
+    
+toast.success("تم تسجيل الخروج بنجاح");
 
     setFormData({
       email: "",

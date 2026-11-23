@@ -1,13 +1,13 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const GetCurrentUser = createAsyncThunk(
   "login/GetCurrentUser",
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/me`,
+        `${API_URL}/api/auth/me`,
         {
           credentials: "include",
         }

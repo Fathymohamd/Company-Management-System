@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-// إرسال بيانات إنشاء الحساب إلى Backend
+
 export const RegisterPages = createAsyncThunk(
   "register/registerUser",
   async (formData, { rejectWithValue }) => {

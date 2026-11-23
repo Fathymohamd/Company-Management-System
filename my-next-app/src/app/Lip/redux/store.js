@@ -30,6 +30,8 @@ import me from "./me/me";
 
 import reportsSlice from "./reports/reportsSlice";
 
+import logoutSlice from "./logoutSlice/logoutSlice"
+
 export const store = configureStore({
   reducer: {
     employees: employeesReducer,
@@ -60,6 +62,8 @@ export const store = configureStore({
 
     userToken : me,
 
-    reports : reportsSlice
+    reports : reportsSlice,
+
+    logout : logoutSlice
   },
 });

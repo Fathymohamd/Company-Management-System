@@ -72,6 +72,9 @@ import meRouter from "./routes/me.js";
 
 import reportsRouter from "./routes/reports.js";
 
+import logoutSlice from "./routes/logoutSlice.js";
+
+
 
 
 const app = express();
@@ -160,6 +163,8 @@ app.use("/api/auth/login", login)
 app.use("/api/auth/me", meRouter);
 
 app.use("/api/reports", reportsRouter);
+
+app.use("/api/auth/logout", logoutSlice);
 
 app.get("/", (req, res) => {
   res.send("Company API is running");
